@@ -161,6 +161,37 @@ python3 -m vllm.entrypoints.openai.api_server \
 
 - After successful startup, the model service will be accessible at `http://localhost:8000/v1`. If you deploy the model on a remote server, access it using that server's IP address.
 
+### 4. Check Model Deployment
+
+After the model service starts, you can use the check script to verify if the deployment is successful:
+
+```bash
+python scripts/check_deployment_cn.py --base-url http://your-ip:your-port/v1 --model model-name
+```
+
+The script will send a test request and display the model's inference results, allowing you to determine if the model deployment is working properly.
+
+Based on the given task, the expected output is as follows. **If the chain of thought is very short or shows garbled text, it's likely that the model deployment failed**. Please carefully check the configuration and dependencies required in the documentation.
+
+```
+<think>The user wants to compare the price of this shampoo on JD.com and Taobao, then choose the cheapest platform to place an order. Currently in the Xiaohongshu app, displaying a post about LUMMI MOOD shampoo.
+
+I need to:
+1. First launch the JD.com app and search for this shampoo
+2. Check the price on JD.com
+3. Then launch the Taobao app and search for this shampoo
+4. Check the price on Taobao
+5. After comparing prices, choose the cheapest JD.com or Taobao to place an order
+
+First, I need to exit the current Xiaohongshu interface, then launch the JD.com app.</think>
+<answer>do(action="Launch", app="JD.com")
+```
+
+**Parameter Description:**
+- `--base-url`: Model service address (modify according to actual deployment address)
+- `--model`: Model name
+- `--messages-file`: Optional, specify a custom test message file (defaults to `scripts/sample_messages.json`)
+
 ## Using AutoGLM
 
 ### Command Line
