@@ -55,6 +55,11 @@ Thumbs.db
 /tmp/
 screenshots/
 
+# Slack analysis data
+slack_analysis/conversations_data.json
+slack_analysis/analysis_report.txt
+slack_analysis/analysis_data.json
+
 # Keep old files during transition
 call_model.py
 app_package_name.py
